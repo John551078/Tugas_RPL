@@ -1,0 +1,30 @@
+
+name: Team CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      # WAJIB: Run Linter
+      - name: Run Linter (ESLint)
+        run: npm run lint
+
+      # WAJIB: Run Unit Test
+      - name: Run Unit Test (Jest)
+        run: npm test
